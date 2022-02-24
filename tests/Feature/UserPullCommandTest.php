@@ -21,7 +21,7 @@ class UserPullCommandTest extends BaseTestCase
         $this->fakeRequest();
         $mock = $this->mockResponse();
 
-        Artisan::call('external-post:pull');
+        Artisan::call('external-users:pull');
 
         $users = User::all();
         $this->assertCount(count($mock['total']), $users);
