@@ -2,10 +2,14 @@
 
 namespace Tests;
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Http;
 
 class BaseTestCase extends TestCase
 {
+    use DatabaseMigrations;
+    use DatabaseTransactions;
     protected function fakeRequest()
     {
         $mock = $this->mockResponse();
@@ -22,7 +26,7 @@ class BaseTestCase extends TestCase
      */
     protected function mockResponse(): array
     {
-        $data = file_get_contents(__DIR__ . 'mock/user.json');
+        $data = file_get_contents(__DIR__ . '/mock/users.json');
         return json_decode($data, true);
     }
 }

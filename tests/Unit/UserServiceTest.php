@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Http;
@@ -10,8 +11,6 @@ use Tests\BaseTestCase;
 
 class UserServiceTest extends BaseTestCase
 {
-    use DatabaseMigrations;
-    use DatabaseTransactions;
 
     public function test_service_can_pull_data()
     {
@@ -21,6 +20,6 @@ class UserServiceTest extends BaseTestCase
 
         resolve(UserService::class)->pullUsers();
         $users = User::all();
-        $this->assertCount(count($mock['total']), $users);
+        $this->assertEquals($mock['total'], $users->count());
     }
 }
